@@ -85,29 +85,31 @@ const AddProduct = () => {
           enableReinitialize={true}
           validationSchema={
             Yup.object().shape({
-              sku: Yup.string().required('SKU is required'),
+              sku: Yup.string()
+              .min(8, 'SKU should be of minimum 8 characters length')
+              .required('SKU is required'),
               name: Yup.string().required('Name is required'),
-              price: Yup.string().required('Price is required'),
+              price: Yup.number().required('Price is required'),
               productType: Yup.string().required('Select a product type'),
-              size: Yup.string().when('productType', {
+              size: Yup.number().when('productType', {
                 is: (val) => val == "DVD",
-                then: Yup.string().required('Enter size') 
+                then: Yup.number().required('Enter size') 
               }),
-              weight: Yup.string().when('productType', {
+              weight: Yup.number().when('productType', {
                 is: (val) => val == "Book",
-                then: Yup.string().required('Enter weight')
+                then: Yup.number().required('Enter weight')
               }),
-              height: Yup.string().when('productType', {
+              height: Yup.number().when('productType', {
                 is: (val) => val == "Furniture",
-                then: Yup.string().required('Enter height'),
+                then: Yup.number().required('Enter height'),
               }),
-              width: Yup.string().when('productType', {
+              width: Yup.number().when('productType', {
                 is: (val) => val == "Furniture",
-                then: Yup.string().required('Enter width'),
+                then: Yup.number().required('Enter width'),
               }),
-              length: Yup.string().when('productType', {
+              length: Yup.number().when('productType', {
                 is: (val) => val == "Furniture",
-                then: Yup.string().required('Enter length'),
+                then: Yup.number().required('Enter length'),
               })
             })
           }
